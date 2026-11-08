@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2a0a14">
+<title>Siz uchun ♡</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💌</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,500;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rose:#e8768f;
+  --rose-l:#f6b6c4;
+  --rose-d:#b83a5e;
+  --wine:#a52c50;
+  --ink:#4a2330;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  min-height:100vh;min-height:100dvh;
+  overflow:hidden;
+  font-family:'Lora',Georgia,serif;
+  color:var(--ink);
+  background:
+    radial-gradient(ellipse at 50% -10%, #8a2443 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 115%, #94294a 0%, transparent 55%),
+    linear-gradient(160deg,#2a0a14 0%,#5c1428 55%,#3a0d1c 100%);
+  background-color:#2a0a14;
+  -webkit-tap-highlight-color:transparent;
+  -webkit-font-smoothing:antialiased;
+}
+svg{display:block}
+
+/* ---------- floating background ---------- */
+.sky,.fx{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.sky{z-index:0}
+.fx{z-index:50}
+.float-heart{
+  position:absolute;bottom:-60px;left:var(--x);
+  width:var(--s);height:var(--s);color:var(--c);opacity:0;
+  animation:rise var(--d) linear var(--dl) infinite;
+  filter:drop-shadow(0 0 6px rgba(255,150,180,.35));
+}
+.float-heart svg{width:100%;height:100%}
+@keyframes rise{
+  0%{transform:translate3d(0,0,0) rotate(0);opacity:0}
+  10%{opacity:var(--o)}
+  50%{transform:translate3d(var(--sw),-55vh,0) rotate(18deg)}
+  85%{opacity:var(--o)}
+  100%{transform:translate3d(0,-120vh,0) rotate(-12deg);opacity:0}
+}
+.spark{
+  position:absolute;left:var(--x);top:var(--y);
+  width:var(--s);height:var(--s);border-radius:50%;
+  background:#fff;opacity:0;
+  box-shadow:0 0 6px 1px rgba(255,220,230,.8);
+  animation:twinkle var(--d) ease-in-out var(--dl) infinite;
+}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:var(--o);transform:scale(1)}}
+
+.burst{
+  position:fixed;left:var(--x);top:var(--y);
+  width:var(--s);height:var(--s);
+  margin:calc(var(--s) / -2) 0 0 calc(var(--s) / -2);
+  color:var(--c);
+  animation:burst var(--d) cubic-bezier(.15,.75,.3,1) forwards;
+}
+.burst svg{width:100%;height:100%}
+@keyframes burst{
+  0%{transform:translate(0,0) scale(.2) rotate(0);opacity:1}
+  70%{opacity:1}
+  100%{transform:translate(var(--tx),var(--ty)) scale(1) rotate(var(--r));opacity:0}
+}
+
+/* ---------- intro scene ---------- */
+.scene{
+  position:relative;z-index:2;
+  min-height:100vh;min-height:100dvh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:24px 16px calc(24px + env(safe-area-inset-bottom));
+  text-align:center;
+  transition:opacity .9s ease, transform 1s cubic-bezier(.6,0,.3,1);
+}
+.scene.leave{opacity:0;transform:translateY(-24px) scale(1.06);pointer-events:none}
+
+.kicker,.title,.hint{transition:opacity .6s ease}
+.scene.opening .kicker,.scene.opening .title,.scene.opening .hint{opacity:0}
+.kicker{margin-bottom:clamp(14px,4vw,24px)}
+.kicker span{
+  display:block;
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  letter-spacing:.2em;
+  color:var(--rose-l);
+  font-size:clamp(15px,4vw,19px);
+  opacity:.9;
+  animation:fadeUp 1.2s .2s both;
+}
+.title span{
+  display:block;
+  font-family:'Great Vibes',cursive;font-weight:400;
+  font-size:clamp(58px,17vw,100px);
+  line-height:1.15;
+  padding:.35em .35em .12em;
+  margin:-.22em 0 0;
+  background:linear-gradient(120deg,#ffd6df,#f6a5b8 35%,#f3d9a4 60%,#ffd6df 85%);
+  background-size:200% auto;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 2px 18px rgba(255,140,170,.35));
+  animation:fadeUp 1.2s .35s both, shimmer 7s linear infinite;
+}
+@keyframes shimmer{to{background-position:200% center}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+.env-wrap{
+  --w:min(82vw,420px);
+  position:relative;isolation:isolate;
+  width:var(--w);
+  margin:0;
+  animation:fadeUp 1.2s .55s both;
+}
+.floater{animation:float 4.5s ease-in-out infinite}
+@keyframes float{
+  0%,100%{transform:translateY(0) rotate(-1deg)}
+  50%{transform:translateY(-10px) rotate(1deg)}
+}
+.envelope.open ~ .env-glow,.scene.opening .floater{animation-play-state:paused}
+.env-glow{
+  position:absolute;left:50%;top:50%;z-index:-1;
+  width:160%;aspect-ratio:1;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(255,120,160,.38) 0%,rgba(255,120,160,.12) 35%,transparent 62%);
+  pointer-events:none;
+  animation:glow 4s ease-in-out infinite;
+}
+@keyframes glow{0%,100%{opacity:.7;transform:translate(-50%,-50%) scale(.95)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}}
+
+.envelope{
+  position:relative;display:block;
+  width:100%;aspect-ratio:3/2;
+  border:0;padding:0;background:none;
+  cursor:pointer;
+  perspective:1400px;
+  transition:transform .4s ease;
+  outline:none;
+  font:inherit;color:inherit;
+}
+.envelope:focus-visible{outline:2px dashed var(--rose-l);outline-offset:12px;border-radius:10px}
+@media (hover:hover){.envelope:not(.open):hover{transform:scale(1.035) rotate(-1deg)}}
+.envelope.open{cursor:default}
+
+.env-back{
+  position:absolute;inset:0;z-index:0;border-radius:8px;
+  background:linear-gradient(180deg,#c97a8b,#b4627a);
+  box-shadow:0 26px 50px -14px rgba(0,0,0,.55);
+}
+.env-letter{
+  position:absolute;left:7%;right:7%;top:5%;height:88%;z-index:1;
+  border-radius:4px;
+  background:linear-gradient(180deg,#fffaf4,#fbefe4);
+  box-shadow:0 2px 10px rgba(0,0,0,.15);
+  display:flex;flex-direction:column;align-items:center;
+  padding-top:9%;
+  transition:transform .7s cubic-bezier(.5,0,.3,1);
+}
+.envelope.open .env-letter{
+  transform:translateY(-58%);
+  transition:transform 1.1s cubic-bezier(.3,.7,.3,1) 1s;
+}
+.mini-heart{display:block;width:calc(var(--w) * .07);height:calc(var(--w) * .07);color:#d0607f;margin-bottom:calc(var(--w) * .01)}
+.mini-heart svg{width:100%;height:100%}
+.hint{position:absolute;left:0;right:0;top:100%;margin-top:clamp(28px,8vw,44px);text-align:center}
+.mini-line{display:block;width:68%;height:1px;margin-top:calc(var(--w) * .035);background:rgba(194,69,106,.22)}
+.mini-line:nth-child(3){width:58%}
+.mini-line:nth-child(4){width:64%}
+
+.env-front{position:absolute;inset:0;z-index:2;pointer-events:none}
+.env-front span{position:absolute;inset:0;border-radius:8px}
+.side-l{clip-path:polygon(0 0,51% 54%,0 100%);background:linear-gradient(90deg,#f0b8c3,#e6a3b1)}
+.side-r{clip-path:polygon(100% 0,49% 54%,100% 100%);background:linear-gradient(270deg,#f0b8c3,#e6a3b1)}
+.side-b{clip-path:polygon(0 100%,50% 46%,100% 100%);background:linear-gradient(0deg,#f8cfd7,#efb7c2)}
+
+.env-flap{
+  position:absolute;left:0;top:0;z-index:3;
+  width:100%;height:60%;
+  border-radius:8px 8px 0 0;
+  transform-origin:50% 0;
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  background:linear-gradient(180deg,#eaa2b2,#d9889c);
+  transform:rotateX(0deg);
+  transition:transform .8s cubic-bezier(.5,0,.3,1) .55s, z-index 0s 1s;
+}
+.envelope.open .env-flap{
+  transform:rotateX(180deg);z-index:0;
+  transition:transform .9s cubic-bezier(.4,0,.2,1) .25s, z-index 0s .7s;
+}
+
+.seal{
+  position:absolute;left:50%;top:60%;z-index:4;
+  width:21%;aspect-ratio:1;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  display:grid;place-items:center;
+  color:#ffd9e1;
+  background:radial-gradient(circle at 35% 30%,#e3586f 0%,#b0213d 55%,#7e1229 100%);
+  box-shadow:0 5px 12px rgba(70,0,18,.5), inset 0 -3px 6px rgba(0,0,0,.28), inset 0 3px 5px rgba(255,255,255,.25);
+  transition:transform .5s ease 1.4s, opacity .5s ease 1.4s;
+}
+.seal::before{content:'';position:absolute;inset:11%;border-radius:50%;border:1px solid rgba(255,220,228,.3)}
+.seal::after{
+  content:'';position:absolute;inset:-5px;border-radius:50%;
+  border:2px solid rgba(255,190,205,.6);
+  animation:ring 2.2s ease-out infinite;
+}
+@keyframes ring{0%{transform:scale(.9);opacity:.9}100%{transform:scale(1.65);opacity:0}}
+.seal svg{width:46%;height:46%;filter:drop-shadow(0 1px 1px rgba(0,0,0,.3))}
+.envelope.open .seal{
+  transform:translate(-50%,-50%) scale(1.6) rotate(25deg);opacity:0;
+  transition:transform .45s cubic-bezier(.3,1.6,.6,1), opacity .4s ease .1s;
+}
+.envelope.open .seal::after{animation:none;opacity:0}
+
+.hint span{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  color:var(--rose-l);
+  font-size:clamp(16px,4.4vw,20px);
+  letter-spacing:.06em;
+  animation:fadeUp 1.2s .85s both, breathe 2.6s ease-in-out 2.2s infinite;
+}
+.hint svg{width:15px;height:15px;color:#ff8fab;animation:beat 1.4s ease-in-out infinite}
+@keyframes breathe{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.25)}30%{transform:scale(1)}45%{transform:scale(1.15)}}
+
+/* ---------- reader ---------- */
+.reader{
+  position:fixed;inset:0;z-index:10;
+  overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+  padding:calc(clamp(20px,6vh,64px) + env(safe-area-inset-top)) 14px calc(48px + env(safe-area-inset-bottom));
+  opacity:0;visibility:hidden;
+  transition:opacity .8s ease, visibility 0s .8s;
+}
+.reader.show{opacity:1;visibility:visible;transition:opacity .8s ease}
+
+.paper{
+  position:relative;
+  max-width:660px;margin:0 auto;
+  border-radius:6px;
+  padding:clamp(34px,8vw,68px) clamp(24px,6.5vw,62px) clamp(36px,7vw,60px);
+  background:
+    radial-gradient(circle at 12% 8%, rgba(255,210,222,.5), transparent 38%),
+    radial-gradient(circle at 92% 96%, rgba(244,200,170,.38), transparent 42%),
+    linear-gradient(180deg,#fffaf4,#fcf0e5);
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.5) inset;
+  transform-origin:50% 0;
+}
+.reader.show .paper{animation:paperIn 1.2s cubic-bezier(.2,.8,.2,1) .1s both}
+@keyframes paperIn{
+  from{opacity:0;transform:perspective(1200px) translateY(50px) rotateX(16deg) scale(.94)}
+  to{opacity:1;transform:none}
+}
+.paper::before,.paper::after{
+  content:'';position:absolute;pointer-events:none;border-radius:4px;
+  border:1px solid rgba(194,69,106,.2);
+}
+.paper::before{inset:12px}
+.paper::after{inset:16px;border-color:rgba(194,69,106,.1)}
+@media (max-width:520px){
+  .paper::before{inset:8px}
+  .paper::after{inset:11px}
+}
+
+.ornament{display:flex;align-items:center;justify-content:center;gap:12px;color:#d0607f}
+.ornament i{display:block;height:1px;width:clamp(40px,14vw,80px);background:linear-gradient(90deg,transparent,currentColor)}
+.ornament i:last-child{background:linear-gradient(270deg,transparent,currentColor)}
+.ornament svg{width:18px;height:18px}
+
+.greeting{
+  font-family:'Great Vibes',cursive;font-weight:400;
+  font-size:clamp(46px,13vw,66px);line-height:1.15;
+  text-align:center;color:var(--rose-d);
+  margin:6px 0 4px;
+}
+.ornament.small{margin-bottom:clamp(24px,6vw,36px)}
+
+.paper p{
+  font-size:clamp(16px,4.3vw,18.5px);
+  line-height:1.85;
+  margin:0 0 1.15em;
+  color:var(--ink);
+  overflow-wrap:break-word;
+}
+.dropcap{
+  font-family:'Great Vibes',cursive;
+  float:left;
+  font-size:3.3em;line-height:.9;
+  padding:.06em .12em 0 0;
+  color:var(--rose-d);
+}
+.love{color:var(--wine);font-style:italic;font-weight:500}
+
+.date{
+  font-family:'Cormorant Garamond',serif !important;font-style:italic;font-weight:600;
+  font-size:clamp(19px,5vw,23px) !important;
+  color:var(--rose-d) !important;
+  text-align:right;
+  margin:.2em 0 1.6em !important;
+  letter-spacing:.05em;
+}
+.date-head{
+  display:flex;align-items:center;gap:14px;
+  text-align:center;justify-content:center;
+  margin:0 0 1.2em !important;
+}
+.date-head::before,.date-head::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(194,69,106,.4))}
+.date-head::after{background:linear-gradient(270deg,transparent,rgba(194,69,106,.4))}
+
+.hearts-sep{display:flex;justify-content:center;gap:10px;margin:.6em 0 2em;color:#e08aa2}
+.hearts-sep svg{width:12px;height:12px}
+.hearts-sep svg:nth-child(2){width:16px;height:16px;color:#d24b6e}
+
+.paper p.finale{
+  font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;
+  font-size:clamp(22px,5.8vw,27px);line-height:1.5;
+  text-align:center;color:var(--wine);
+  margin:1.8em 0 .8em;
+  padding:1.1em .8em;
+  border-radius:12px;
+  background:linear-gradient(180deg,rgba(255,214,224,0),rgba(255,214,224,.55));
+}
+.signature{display:flex;justify-content:center;margin-top:18px;color:#d24b6e}
+.signature svg{width:46px;height:46px;filter:drop-shadow(0 4px 10px rgba(210,75,110,.35));animation:beat 1.6s ease-in-out infinite}
+
+.again{
+  display:block;margin:30px auto 0;
+  font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;
+  color:var(--rose-l);
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,190,205,.35);
+  border-radius:999px;
+  padding:10px 24px;
+  cursor:pointer;
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  transition:background .3s, transform .3s;
+}
+.again:hover{background:rgba(255,255,255,.14);transform:translateY(-1px)}
+
+.reveal{opacity:0;transform:translateY(16px);transition:opacity 1s ease, transform 1s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.2s !important;transition-delay:0s !important}
+}
+</style>
+</head>
+<body>
+
+<div class="sky" id="sky" aria-hidden="true"></div>
+<div class="fx" id="fx" aria-hidden="true"></div>
+
+<main class="scene" id="scene">
+  <div class="env-wrap">
+    <div class="env-glow"></div>
+    <div class="floater">
+      <button class="envelope" id="envelope" aria-label="Xatni ochish" aria-expanded="false">
+        <span class="env-back"></span>
+        <span class="env-letter">
+          <span class="mini-heart" data-heart></span>
+          <span class="mini-line"></span>
+          <span class="mini-line"></span>
+          <span class="mini-line"></span>
+        </span>
+        <span class="env-front"><span class="side-l"></span><span class="side-r"></span><span class="side-b"></span></span>
+        <span class="env-flap"></span>
+        <span class="seal" data-heart></span>
+      </button>
+    </div>
+    <p class="hint"><span>ochish uchun bosing <i data-heart></i></span></p>
+  </div>
+</main>
+
+<section class="reader" id="reader" aria-hidden="true">
+  <article class="paper">
+    <p class="reveal"><span class="dropcap">Sh</span> man bu gaplani etiwga ancha payit harakat qildim lekin bilmadim duhim yetmadimi yoki nmadur boldi riyalna tormiz bob yurdim etaman dp tayinlandimam lekin koriwgan paytimiza chalgip ketim yoki nma dub boshqa temala ochilip ketim man sizga oldinam etganman sizi yoqtiraman dp lekin u payit man seryozna harakat qp etip kormaganman chunki sizi yonizda bowqa odam borligiyam kota sabab bogan va man stop boganman va man hali ozim blan ozim kelishvomagam paytim bogan yani tayor bomaganman disamam boladi</p>
+
+    <p class="reveal">lekin ohirgi paytla uchun riyalna rahmat sizga bla bob oqatlanganimiza yoki pragulka qiganimiza ga yani hamasiga siz oldizda man ozimi ancha yengil bolaman gaplashgan paytimiza yoki sizi korgan paytim korishgan paytimiza iii man bu narsani anchadan beri his qimayapkanidim va bu narsa uchun sizga vapshe kotta rahmat +++</p>
+
+    <p class="reveal">siz da nmadur - bosa yoki sqilsez bu narsa mangayam tasir qvoti iii man oyliman haliyam unda koyni bomi yoki yomi nma bovoti digan galati hayola keluradi vapshe kawa narsala sizga nmadur - kesa yoki siz haqizda nmadur - nito gapla bosayam pizdes asabim buzilip ketadi iii man bu narsalani ozizgayam etganman ozimcha sizi nmadurladan himoya qigim keladi yoki sizga - boladigon narslani etaman lekin ochu oydin etomaganman shu kungacham tormiz bob yuridm uji</p>
+
+    <p class="reveal">ohirgi payit vapshe bu narsa jonimga teydi ozimiyam kech qurun vapshe uji jini bob qosam siz yozmasez yoki nmadur bob siz blan gaplashomasam prosta mahalezga borip kelaman prosta borip padezizda yonida turip nmadur bob chiqip qoladimi digan narsa boladi iii sis babi chiqmisiz iii uyga qaytaman bilmadim bu manga nma beradi lekin hotirjam bob uyga qaytaman keyin.</p>
+
+    <p class="reveal"><span class="love">Manimcha man uji sizi rostan yoqtirip qoldim</span> seryozna oldin unchali bomagan lekin</p>
+
+    <p class="reveal">Siz etishiz mumkun hama qizlaga qaris shunaqa yoki oson qp etsez apwak siz diyishiz mumkun da shunaqa bogan man tan olaman lekin ohirgi payit nixuya unaqa narsaga man qiziqmayaman ozimi cantrol qilishi organvoman hudo shukur hozircha yahshi ketvoti.</p>
+
+    <p class="reveal">Iii siz yoqtirip qoganimdan keyin man uspewniro bolishi boshladim manimcha oldingiga qaraganda nma durlaga harakat qilishi boshladim oson qp etse harakat qilishi boshladim va bu narsa manda shu yaqin 1 2 oygacham vapshe bomagan prosta poxoy 1 kunim otsa boldi uydila bor nmadur bosa boldi dp yashaganman</p>
+
+    <p class="reveal">Chunki buni asosiy sababi ochu etaman siz manda ancha uspewnisiz bu digani manam manimcha seryozniro harakat qilishim kereligini anglatadi manga</p>
+
+    <p class="reveal">Iii man ozim ozim harakat qilishga majburlavoman yani hozi nmadurga harakat qimasam siz yoqolip qolishizdan qorq voman +++ hardoyim soruraman yevropa vizes chiqdi mi dp man riyalna vizes chiqishidan qanaqadur qorqaman va bu narsani ozizgayam etganmann prikol qp chiqmi qosa dp vizes chiqadi In shaaa Allah!!!</p>
+
+    <p class="reveal">shunichunam sizga yozuraman yokida bugun kochaga chiqasmi dp soruraman kopro gaplashgim keluradi tel qiluraman ovoziz ewitgim kep ketguniz gacham qanaqadur yahshi vaziyatla ni siz blan otqizi erte ketsa nma boladi digan narsa miyamda aylanuradi iii bu narsala uchun man sizga reyalna rahmat etaman arzimagan payitlani siz blan hotirjamlini his qildim va bu narsa kopro bolishini niyat qilaman</p>
+
+    <p class="reveal">torisi yevropaga ketishiz aniq boganda man ozimga sovol berdim naxuy yashavosan nma dur qimisami dp qiz bob sandan kopro narsaga erishgan dp shu narslaa mani ancha tori fikirlashga sabab bob nmadur qilishga kuch bevoti manga+++ man ohirgi payitla ozimcha nomoz oqishiyam boshlavordim ++ tahajudam oqidim</p>
+
+    <p class="reveal">Esizda bosa siz blan ohirgi korishganimizda etudim tahajud oqidim nmadurlani soradim hudodan dp sizga shu tema ochilgan payit iii man ushanda sizi soragandim hudodan + odiy nomozlarimdayam ii bu bovokan narsalaga ozimam torisi hayron qovordim chunki man ancha tanafus qiganidim nomozdan yiladan beri nomzo oqimastim ozimga ozim bohonala qp yurardim lekin ohirgi 1 oy bu narsala kuzatilmayapti ozim holap turip oqivoman ii sizi duvoyimda sorashga kuch bervoti hudo manga</p>
+
+    <p class="reveal">Iii bu narsala dan vapshe hursan qivoti chunki mani</p>
+
+    <p class="reveal">Mani qora hayotimga nmadur rangali kirishi nmadurla qilishi organishi harakat qilishi nmadurlaga erishishi oylashi boshladim bu narsala hamasi sizi dp 100% undan oldin bilmiman</p>
+
+    <p class="reveal">prosta kunim otip oyla otip ketvotudi nma bovokanigayam chunmi yurardim aa hozi bosa Allahga shukur manda maqsad bor nmadurga intilish bor +++ siz hali toshkendasiz ✨✨</p>
+
+    <p class="reveal">va man 1 narsadan afsuslanaman sizi oldin kop asabizga teyardim qanaqadur qaturo hafayam qiaganman i bula uchun uzur etip qoyishim kere bogan narsedi buyam chunki siz ketishiz blip turip qadir qimatiz oshvoti torisi ketishiz manga kotta ++ lekin qanaqadur manoda - - op kevoti</p>
+
+    <p class="reveal">Va man bu gaplani sizga ohirgi payitla kop urindim etishga lekin qolimdan kemadi yuzma yuz etishga daji man nomozda ozimga ozim qasam ichtim etaman shu safar korishsam dp lekin bu narsa qolimdan kemadi torisi shuni chunam man erinmastan yozip chiqtim va busafaram etishga duhim yetmasligini bilip turip oziz oqiganiz yahshiro manga manimcha siz tori chunas mani hozirgi holatimi va mandi gi vaziyati</p>
+
+    <p class="reveal date">22.10.2026</p>
+
+    <div class="hearts-sep reveal"><span data-heart></span><span data-heart></span><span data-heart></span></div>
+
+    <p class="reveal date date-head">8.11.2026</p>
+
+    <p class="reveal">Bugun siz blan gaplashtim man torisi hafa qp qoyganimdan keyin yaqinro odamga ohshab va man tepada yozgan gaplarimi ancha oldin yozganidim lekin sizga daji oqip chiqin dibam duh yetmadi bilmadim qorqtim nmadurladan</p>
+
+    <p class="reveal">Qorquv boldi lekin bugun gaplashganimizdan keyi siz eski yigitizi Et berdiz torisi pizdes man mutman siz haliyam qanaqadur unda koyniz bordaka tuyildi Musada</p>
+
+    <p class="reveal">Manga shunaqa tuyildi bilmadim lekin torisi man vapshe shokdaman hozirgi holatim chuntiribam beromiman torisi ozi siz ketishizi bilip pizdes mutman har kuni yo joydan sqilip yuraman kech qurun pizdes prosta yaqinda ketadi man uni koromiman yoki unaqa yaqin bob gaplashomasamchi mayli orto sifatida bosayam digan narsa miyamda aylanuradi sizi ketishiz man uchun prosta siz yo bobqolasdaka narsa va man bu narsani holamiman har safar ketishizi siz blan gaplashganimizda man kulip gaplashaman lekin undan keyi usha kun pizdes sqilaman va bugun riyalna etmasam bomasdi uji kawa bobketi ozim miyam</p>
+
+    <p class="reveal"><span class="love">Man sizi riyalna sevip qoldim uji</span> va man bu natsani prikolga omayaman uji seryozna siz sqilsez prosta manam sqilaman kech payit ozimcha ayraportga boraman yoki domiz tarafga Honabodga prosta borip muzika ewitip qaytaman keyi odam sla yahshi boladi va bu ohirgi payitla manga ancha yordam bervoti Pls jahliz chiqmasin bunda pizdes manda faqat shu yechim bor bomasam bilmadim hotirjam bolomiman!</p>
+
+    <p class="reveal">Va man sizdan iltimos ap qolardim arzimagan odamla uchun sigilip yoki uni oylab nmadurladan hafa bolishz torisi nixuya arzimidigon narsa la u uchun sqilip nmadur sovolaga jovop topgiz kelishi u uchun nixuya arzimidigon narsala</p>
+
+    <p class="reveal finale">Qadir qimatiz bor insonsiz man shunaqa oyliman sizam shunaqa fikirlashiz holiman</p>
+
+    <div class="signature reveal" data-heart></div>
+  </article>
+
+  <button class="again" id="again">konvertga qaytarish</button>
+</section>
+
+<script>
+(function(){
+  var HEART = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 21.2s-7.6-4.7-10.1-9.3C.2 8.6 2 4 6.4 4c2.3 0 3.9 1.3 5.6 3.4C13.7 5.3 15.3 4 17.6 4 22 4 23.8 8.6 22.1 11.9 19.6 16.5 12 21.2 12 21.2z"/></svg>';
+  document.querySelectorAll('[data-heart]').forEach(function(el){ el.insertAdjacentHTML('beforeend', HEART); });
+
+  var $ = function(s){ return document.querySelector(s); };
+  var sky = $('#sky'), fx = $('#fx'), env = $('#envelope'), scene = $('#scene'), reader = $('#reader'), again = $('#again');
+  var small = window.matchMedia('(max-width: 600px)').matches;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var colors = ['#ffb3c6','#ff8fab','#f7c6d0','#ffd6e0','#f3d9a4','#ff6f91'];
+  var rnd = function(a,b){ return a + Math.random()*(b-a); };
+  var pick = function(a){ return a[Math.floor(Math.random()*a.length)]; };
+
+  /* background hearts + sparkles */
+  if(!reduce){
+    for(var i=0;i<(small?14:26);i++){
+      var h = document.createElement('span');
+      h.className = 'float-heart';
+      h.innerHTML = HEART;
+      h.style.cssText = '--x:'+rnd(0,100)+'%;--s:'+rnd(10, small?24:32)+'px;--c:'+pick(colors)+';--o:'+rnd(.35,.8)+';--d:'+rnd(11,22)+'s;--dl:'+rnd(-22,0)+'s;--sw:'+rnd(-60,60)+'px';
+      sky.appendChild(h);
+    }
+  }
+  for(var j=0;j<(small?28:50);j++){
+    var s = document.createElement('span');
+    s.className = 'spark';
+    s.style.cssText = '--x:'+rnd(0,100)+'%;--y:'+rnd(0,100)+'%;--s:'+rnd(1.5,3.2)+'px;--o:'+rnd(.4,.9)+';--d:'+rnd(2.5,6)+'s;--dl:'+rnd(-6,0)+'s';
+    sky.appendChild(s);
+  }
+
+  function burst(x, y, n){
+    if(reduce) return;
+    for(var k=0;k<n;k++){
+      var b = document.createElement('span');
+      b.className = 'burst';
+      b.innerHTML = HEART;
+      var ang = rnd(0, Math.PI*2), dist = rnd(80, small?190:280);
+      b.style.cssText = '--x:'+x+'px;--y:'+y+'px;--s:'+rnd(10,26)+'px;--c:'+pick(colors)+';--tx:'+(Math.cos(ang)*dist)+'px;--ty:'+(Math.sin(ang)*dist - 40)+'px;--r:'+rnd(-90,90)+'deg;--d:'+rnd(1.1,1.8)+'s';
+      fx.appendChild(b);
+      setTimeout((function(el){ return function(){ el.remove(); }; })(b), 2000);
+    }
+  }
+
+  var items = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  var io = null, state = 'closed';
+
+  function startReveal(){
+    var firstBatch = true;
+    if(!('IntersectionObserver' in window)){ items.forEach(function(el){ el.classList.add('in'); }); return; }
+    io = new IntersectionObserver(function(entries){
+      var n = 0;
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          e.target.style.transitionDelay = ((firstBatch ? .6 : 0) + n*.14) + 's';
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+          n++;
+        }
+      });
+      firstBatch = false;
+    }, { root: reader, threshold: .12, rootMargin: '0px 0px -4% 0px' });
+    items.forEach(function(el){ io.observe(el); });
+  }
+
+  function open(){
+    if(state !== 'closed') return;
+    state = 'opening';
+    scene.classList.add('opening');
+    env.classList.add('open');
+    env.setAttribute('aria-expanded','true');
+    var r = env.getBoundingClientRect();
+    burst(r.left + r.width/2, r.top + r.height*.6, small?22:32);
+    setTimeout(function(){ burst(r.left + r.width/2, r.top - r.height*.15, small?14:20); }, 1500);
+    setTimeout(function(){
+      scene.classList.add('leave');
+      reader.scrollTop = 0;
+      reader.classList.add('show');
+      reader.setAttribute('aria-hidden','false');
+      startReveal();
+      state = 'open';
+    }, reduce ? 500 : 2350);
+  }
+
+  function close(){
+    if(state !== 'open') return;
+    state = 'closing';
+    reader.classList.remove('show');
+    reader.setAttribute('aria-hidden','true');
+    if(io) io.disconnect();
+    setTimeout(function(){
+      items.forEach(function(el){ el.classList.remove('in'); el.style.transitionDelay = ''; });
+      scene.classList.remove('leave');
+      setTimeout(function(){
+        env.classList.remove('open');
+        scene.classList.remove('opening');
+        env.setAttribute('aria-expanded','false');
+        setTimeout(function(){ state = 'closed'; }, 1500);
+      }, 700);
+    }, 800);
+  }
+
+  env.addEventListener('click', open);
+  again.addEventListener('click', close);
+})();
+</script>
+</body>
+</html>
